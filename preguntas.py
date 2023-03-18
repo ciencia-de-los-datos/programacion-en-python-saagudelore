@@ -126,8 +126,19 @@ def pregunta_04():
     ]
 
     """
+    table = read_csv()
 
-    return 
+    dictionary = {}
+    for row in table:
+        date_month = str(row[2]).split("-")[1]
+        if date_month in dictionary:
+            dictionary[date_month] += 1
+        else:
+            dictionary[date_month] = 1
+
+    date_list = [(key, dictionary[key]) for key in sorted(dictionary)]
+
+    return date_list
 
 def pregunta_05():
     """
