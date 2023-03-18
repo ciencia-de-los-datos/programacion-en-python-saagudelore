@@ -54,8 +54,24 @@ def pregunta_02():
     ]
 
     """
+    table = read_csv()
+    dictionary = {}
+    for row in table:
+        letter = row[0]
+        if letter in dictionary:
+            dictionary[letter] += 1
+        else:
+            dictionary[letter] = 1
 
-    return 
+    keys = sorted(dictionary)
+
+    sorted_dictionary = {}
+    for key in keys:
+        sorted_dictionary[key] = dictionary[key]
+
+    final_list = [(key, sorted_dictionary[key]) for key in sorted_dictionary]
+
+    return final_list
 
 def pregunta_03():
     """
