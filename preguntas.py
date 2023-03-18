@@ -355,8 +355,17 @@ def pregunta_11():
         "g": 35,
     }
     """
+    table = read_csv()
 
-    return 
+    dictionary = {}
+    for row in table:
+        value = int(row[1])
+        letters = row[3].split(",")
+        for letter in letters:
+            dictionary[letter] = value if (letter not in dictionary) else (dictionary[letter]+value)
+    sorted_dictionary = {key: dictionary[key] for key in sorted(dictionary)}
+
+    return sorted_dictionary
 
 def pregunta_12():
     """
