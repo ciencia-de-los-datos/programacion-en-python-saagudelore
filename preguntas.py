@@ -327,8 +327,17 @@ def pregunta_10():
         ("E", 3, 3),
     ]
     """
+    table = read_csv()
 
-    return 
+    result_list = []
+    for row in table:
+        col1, col4, col5 = row[0], row[3], row[4]
+        num_col4_values = len(col4.split(","))
+        num_col5_values = len(col5.split(","))
+
+        result_list.append((col1, int(num_col4_values), int(num_col5_values)))
+
+    return result_list
 
 def pregunta_11():
     """
