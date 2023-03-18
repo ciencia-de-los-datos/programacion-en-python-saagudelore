@@ -266,8 +266,19 @@ def pregunta_08():
         (9, ["A", "B", "C", "E"]),
     ]
     """
+    table = read_csv()
 
-    return 
+    dictionary = {}
+    for row in table:
+        letter, number = row[0], row[1]
+        if number not in dictionary:
+            dictionary[number] = [letter]
+        else:
+            dictionary[number].append(letter) if (letter not in dictionary[number]) else dictionary[number]
+
+    list_values = [(int(key), sorted(dictionary[key])) for key in sorted(dictionary)]
+
+    return list_values
 
 def pregunta_09():
     """
