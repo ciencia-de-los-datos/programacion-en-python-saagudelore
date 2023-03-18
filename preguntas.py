@@ -88,8 +88,21 @@ def pregunta_03():
     ]
 
     """
+    table = read_csv()
+    dictionary = {}
+    for row in table:
+        letter = row[0]
+        value = int(row[1])
+        if letter in dictionary:
+            dictionary[letter] += value
+        else:
+            dictionary[letter] = value
 
-    return 
+    final_dict = {key: dictionary[key] for key in sorted(dictionary)}
+
+    final_list = [(key, final_dict[key]) for key in final_dict]
+
+    return final_list
 
 def pregunta_04():
     """
