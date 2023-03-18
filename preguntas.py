@@ -300,8 +300,16 @@ def pregunta_09():
     }
 
     """
+    table = read_csv()
 
-    return 
+    dictionary = {}
+    for row in table:
+        col4 = row[4].split(",")
+        for group in col4:
+            key = group.split(":")[0] 
+            dictionary[key] = 1 if (key not in dictionary) else dictionary[key]+1
+
+    return dictionary
 
 def pregunta_10():
     """
