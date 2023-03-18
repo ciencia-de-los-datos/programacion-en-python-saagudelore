@@ -193,7 +193,23 @@ def pregunta_06():
     ]
     """
 
-    return 
+    table = read_csv()
+
+    dictionary = {}
+    for row in table:
+        col4 = row[4].split(",")
+        for group in col4:
+            key, value = group.split(":")  
+            value = int(value)    
+            if key not in dictionary:  
+                dictionary[key] = [value, value]
+            else:
+                dictionary[key][0] = value if (value < dictionary[key][0]) else dictionary[key][0]
+                dictionary[key][1] = value if (value > dictionary[key][1]) else dictionary[key][1]
+
+    list_values = [(key, dictionary[key][0], (dictionary[key][1])) for key in sorted(dictionary)]
+
+    return list_values
 
 def pregunta_07():
     """
