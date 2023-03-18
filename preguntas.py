@@ -11,7 +11,18 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import sys
 
+def read_csv():
+    with open('data.csv', 'r') as data:  
+        table = []
+        for line in data:
+            words = line.split('\t')
+            # words += words[4].split(',')
+            # words.pop(4)
+            words[-1] = words[-1][:-1]
+            table.append(words)
+    return table
 
 def pregunta_01():
     """
@@ -19,10 +30,14 @@ def pregunta_01():
 
     Rta/
     214
-
+    
     """
-    return
-
+    table = read_csv()
+    sum_total = 0
+    for row in table:
+        number = int(row[1])
+        sum_total += number
+    return sum_total
 
 def pregunta_02():
     """
@@ -39,8 +54,8 @@ def pregunta_02():
     ]
 
     """
-    return
 
+    return 
 
 def pregunta_03():
     """
@@ -57,8 +72,8 @@ def pregunta_03():
     ]
 
     """
-    return
 
+    return 
 
 def pregunta_04():
     """
@@ -82,8 +97,8 @@ def pregunta_04():
     ]
 
     """
-    return
 
+    return 
 
 def pregunta_05():
     """
@@ -100,8 +115,8 @@ def pregunta_05():
     ]
 
     """
-    return
 
+    return 
 
 def pregunta_06():
     """
@@ -123,10 +138,9 @@ def pregunta_06():
         ("iii", 0, 9),
         ("jjj", 5, 17),
     ]
-
     """
-    return
 
+    return 
 
 def pregunta_07():
     """
@@ -147,10 +161,9 @@ def pregunta_07():
         (8, ["E", "D", "E", "A", "B"]),
         (9, ["A", "B", "E", "A", "A", "C"]),
     ]
-
     """
-    return
 
+    return 
 
 def pregunta_08():
     """
@@ -172,10 +185,9 @@ def pregunta_08():
         (8, ["A", "B", "D", "E"]),
         (9, ["A", "B", "C", "E"]),
     ]
-
     """
-    return
 
+    return 
 
 def pregunta_09():
     """
@@ -197,8 +209,8 @@ def pregunta_09():
     }
 
     """
-    return
 
+    return 
 
 def pregunta_10():
     """
@@ -215,11 +227,9 @@ def pregunta_10():
         ("E", 2, 3),
         ("E", 3, 3),
     ]
-
-
     """
-    return
 
+    return 
 
 def pregunta_11():
     """
@@ -236,11 +246,9 @@ def pregunta_11():
         "f": 134,
         "g": 35,
     }
-
-
     """
-    return
 
+    return 
 
 def pregunta_12():
     """
@@ -257,4 +265,5 @@ def pregunta_12():
     }
 
     """
-    return
+
+    return 
