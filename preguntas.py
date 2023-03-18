@@ -382,5 +382,16 @@ def pregunta_12():
     }
 
     """
+    table = read_csv()
 
-    return 
+    dictionary = {}
+    for row in table:
+        col5 = row[4].split(",")
+        letter = row[0]
+        for group in col5:
+            value = int(group.split(":")[1])
+            dictionary[letter] = value if (letter not in dictionary) else (dictionary[letter]+value)
+            
+    sorted_dictionary = {key: dictionary[key] for key in sorted(dictionary)}
+
+    return sorted_dictionary
