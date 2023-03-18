@@ -155,8 +155,21 @@ def pregunta_05():
     ]
 
     """
+    table = read_csv()
 
-    return 
+    dictionary = {}
+    for row in table:
+        letter = row[0]
+        number = row[1]
+        if letter not in dictionary:  
+            dictionary[letter] = [number, number]
+        else:
+            dictionary[letter][0] = number if (number > dictionary[letter][0]) else dictionary[letter][0]
+            dictionary[letter][1] = number if (number < dictionary[letter][1]) else dictionary[letter][1]
+
+    list_values = [(key, int(dictionary[key][0]), int(dictionary[key][1])) for key in sorted(dictionary)]
+
+    return list_values
 
 def pregunta_06():
     """
