@@ -11,7 +11,18 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import sys
 
+def read_csv():
+    with open('data.csv', 'r') as data:  
+        table = []
+        for line in data:
+            words = line.split('\t')
+            # words += words[4].split(',')
+            # words.pop(4)
+            words[-1] = words[-1][:-1]
+            table.append(words)
+    return table
 
 def pregunta_01():
     """
@@ -19,10 +30,14 @@ def pregunta_01():
 
     Rta/
     214
-
+    
     """
-    return
-
+    table = read_csv()
+    sum_total = 0
+    for row in table:
+        number = int(row[1])
+        sum_total += number
+    return sum_total
 
 def pregunta_02():
     """
@@ -39,8 +54,24 @@ def pregunta_02():
     ]
 
     """
-    return
+    table = read_csv()
+    dictionary = {}
+    for row in table:
+        letter = row[0]
+        if letter in dictionary:
+            dictionary[letter] += 1
+        else:
+            dictionary[letter] = 1
 
+    keys = sorted(dictionary)
+
+    sorted_dictionary = {}
+    for key in keys:
+        sorted_dictionary[key] = dictionary[key]
+
+    final_list = [(key, sorted_dictionary[key]) for key in sorted_dictionary]
+
+    return final_list
 
 def pregunta_03():
     """
@@ -57,8 +88,21 @@ def pregunta_03():
     ]
 
     """
-    return
+    table = read_csv()
+    dictionary = {}
+    for row in table:
+        letter = row[0]
+        value = int(row[1])
+        if letter in dictionary:
+            dictionary[letter] += value
+        else:
+            dictionary[letter] = value
 
+    final_dict = {key: dictionary[key] for key in sorted(dictionary)}
+
+    final_list = [(key, final_dict[key]) for key in final_dict]
+
+    return final_list
 
 def pregunta_04():
     """
@@ -82,8 +126,19 @@ def pregunta_04():
     ]
 
     """
-    return
+    table = read_csv()
 
+    dictionary = {}
+    for row in table:
+        date_month = str(row[2]).split("-")[1]
+        if date_month in dictionary:
+            dictionary[date_month] += 1
+        else:
+            dictionary[date_month] = 1
+
+    date_list = [(key, dictionary[key]) for key in sorted(dictionary)]
+
+    return date_list
 
 def pregunta_05():
     """
@@ -100,8 +155,21 @@ def pregunta_05():
     ]
 
     """
-    return
+    table = read_csv()
 
+    dictionary = {}
+    for row in table:
+        letter = row[0]
+        number = row[1]
+        if letter not in dictionary:  
+            dictionary[letter] = [number, number]
+        else:
+            dictionary[letter][0] = number if (number > dictionary[letter][0]) else dictionary[letter][0]
+            dictionary[letter][1] = number if (number < dictionary[letter][1]) else dictionary[letter][1]
+
+    list_values = [(key, int(dictionary[key][0]), int(dictionary[key][1])) for key in sorted(dictionary)]
+
+    return list_values
 
 def pregunta_06():
     """
@@ -123,10 +191,25 @@ def pregunta_06():
         ("iii", 0, 9),
         ("jjj", 5, 17),
     ]
-
     """
-    return
 
+    table = read_csv()
+
+    dictionary = {}
+    for row in table:
+        col4 = row[4].split(",")
+        for group in col4:
+            key, value = group.split(":")  
+            value = int(value)    
+            if key not in dictionary:  
+                dictionary[key] = [value, value]
+            else:
+                dictionary[key][0] = value if (value < dictionary[key][0]) else dictionary[key][0]
+                dictionary[key][1] = value if (value > dictionary[key][1]) else dictionary[key][1]
+
+    list_values = [(key, dictionary[key][0], (dictionary[key][1])) for key in sorted(dictionary)]
+
+    return list_values
 
 def pregunta_07():
     """
@@ -147,10 +230,20 @@ def pregunta_07():
         (8, ["E", "D", "E", "A", "B"]),
         (9, ["A", "B", "E", "A", "A", "C"]),
     ]
-
     """
-    return
+    table = read_csv()
 
+    dictionary = {}
+    for row in table:
+        letter, number = row[0], row[1]
+        if number not in dictionary:
+            dictionary[number] = [letter]
+        else:
+            dictionary[number].append(letter)
+
+    list_values = [(int(key), dictionary[key]) for key in sorted(dictionary)]
+
+    return list_values
 
 def pregunta_08():
     """
@@ -172,10 +265,20 @@ def pregunta_08():
         (8, ["A", "B", "D", "E"]),
         (9, ["A", "B", "C", "E"]),
     ]
-
     """
-    return
+    table = read_csv()
 
+    dictionary = {}
+    for row in table:
+        letter, number = row[0], row[1]
+        if number not in dictionary:
+            dictionary[number] = [letter]
+        else:
+            dictionary[number].append(letter) if (letter not in dictionary[number]) else dictionary[number]
+
+    list_values = [(int(key), sorted(dictionary[key])) for key in sorted(dictionary)]
+
+    return list_values
 
 def pregunta_09():
     """
@@ -197,8 +300,16 @@ def pregunta_09():
     }
 
     """
-    return
+    table = read_csv()
 
+    dictionary = {}
+    for row in table:
+        col4 = row[4].split(",")
+        for group in col4:
+            key = group.split(":")[0] 
+            dictionary[key] = 1 if (key not in dictionary) else dictionary[key]+1
+
+    return dictionary
 
 def pregunta_10():
     """
@@ -215,11 +326,18 @@ def pregunta_10():
         ("E", 2, 3),
         ("E", 3, 3),
     ]
-
-
     """
-    return
+    table = read_csv()
 
+    result_list = []
+    for row in table:
+        col1, col4, col5 = row[0], row[3], row[4]
+        num_col4_values = len(col4.split(","))
+        num_col5_values = len(col5.split(","))
+
+        result_list.append((col1, int(num_col4_values), int(num_col5_values)))
+
+    return result_list
 
 def pregunta_11():
     """
@@ -236,11 +354,18 @@ def pregunta_11():
         "f": 134,
         "g": 35,
     }
-
-
     """
-    return
+    table = read_csv()
 
+    dictionary = {}
+    for row in table:
+        value = int(row[1])
+        letters = row[3].split(",")
+        for letter in letters:
+            dictionary[letter] = value if (letter not in dictionary) else (dictionary[letter]+value)
+    sorted_dictionary = {key: dictionary[key] for key in sorted(dictionary)}
+
+    return sorted_dictionary
 
 def pregunta_12():
     """
@@ -257,4 +382,16 @@ def pregunta_12():
     }
 
     """
-    return
+    table = read_csv()
+
+    dictionary = {}
+    for row in table:
+        col5 = row[4].split(",")
+        letter = row[0]
+        for group in col5:
+            value = int(group.split(":")[1])
+            dictionary[letter] = value if (letter not in dictionary) else (dictionary[letter]+value)
+            
+    sorted_dictionary = {key: dictionary[key] for key in sorted(dictionary)}
+
+    return sorted_dictionary
